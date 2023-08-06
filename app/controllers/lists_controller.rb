@@ -13,7 +13,8 @@ class ListsController < ApplicationController
     redirect_to '/top'
   end
 
-  def index
+  def index #一覧画面用のアクション
+    @lists = List.all
   end
 
   def show
