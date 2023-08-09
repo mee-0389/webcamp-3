@@ -9,8 +9,8 @@ class ListsController < ApplicationController
     list = List.new(list_params)
     #データをデータベースに保存するためのsaveメソッド実行
     list.save
-    #トップ画面へリダイレクト
-    redirect_to '/top'
+    #詳細画面へリダイレクト
+    redirect_to list_path(list.id)
   end
 
   def index #一覧画面用のアクション
@@ -18,9 +18,18 @@ class ListsController < ApplicationController
   end
 
   def show
+    @list = List.find(params[:id])
   end
 
   def edit
+    @list = List.find(params[:id])
+  end
+
+  def update
+    list = List.find(params[:id])
+    list.update(list_params)
+    redirect_to list_path(list.id)
+    #更新後にリダイレクトし、変更をviewファイルに渡す必要がないのでローカル変数
   end
 
   private
